@@ -1,4 +1,3 @@
-
 import random
 import string
 import pytest
@@ -90,5 +89,4 @@ def get_order_id_and_delete():
     order_id = r.json()["order"]["id"]
 
     yield order_id
-    o = OrderMethods.cancel_order(track)
-
+    OrderMethods.cancel_order(track)

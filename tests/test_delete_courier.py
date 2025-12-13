@@ -16,17 +16,16 @@ class TestDeleteCourier:
         assert deleted_courier.json() == {"ok": True}
 
     @pytest.mark.parametrize('new_id', ['0', '10000000', '-1'])
-    @allure.title("Код 404 при удалении курьерас несуществующим id")
+    @allure.title("Код 404 при удалении курьера с несуществующим id")
     def test_delete_courier_with_non_existing_id_failed(self, new_id):
         response = CourierMethods.delete_courier(new_id)
         assert response.status_code == 404
 
     @allure.title("Код 400 при удалении курьера без передачи id")
-    @pytest.mark.xfail(reason="Код 404 вместо 400 при отправке запроса без id")
     def test_delete_courier_with_empty_id(self):
         response = CourierMethods.delete_courier(courier_id='')
         assert response.status_code == 400
-
+        # Код 404 вместо 400 при отправке запроса без id
 
 
 

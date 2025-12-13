@@ -10,4 +10,3 @@ class TestGetOrdersList:
         response = OrderMethods().get_list_of_orders()
         assert response.status_code == 200
         assert "orders" in response.json()
-        print(response.json())
