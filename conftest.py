@@ -4,7 +4,17 @@ import pytest
 
 from methods.courier_methods import CourierMethods
 from methods.order_methods import OrderMethods
-from data.test_data import TestDataForOrder
+from data.test_data import TestDataForOrder, TestDataForCourier
+
+@pytest.fixture
+def existing_courier():
+    body = TestDataForCourier.VALID_DATA_FOR_COURIER.copy()
+    CourierMethods.create_courier_data(body)
+
+    yield body
+
+    courier_id = CourierMethods.login_courier(body["login"], body["password"])
+    CourierMethods.delete_courier(courier_id)
 
 
 @pytest.fixture
